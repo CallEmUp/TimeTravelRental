@@ -50,7 +50,7 @@ Now that I have reformatted the data so that each variable is now separate and o
 
 After a complete cleaning of the dataframe, I received the following shape and dataframe:
 
-<img src="https://github.com/CallEmUp/TimeTravelRental/blob/main/images/DPP3.png">
+<img src="https://github.com/CallEmUp/TimeTravelRental/blob/main/images/DDP3.png">
 
 After pre-processing, I have come up with the dataframe I plan to use in my analysis and model building. The DataFrame has 5398 rows and 9 columns. As a side note, I am omitting from normalizing the columns just yet, as interpreting my analysis will be more tangible with the actual prices. I will normalize the data for regression and clustering later when I analyze isochrone intersection apartment data.
 
