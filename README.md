@@ -36,13 +36,13 @@ To acquire this data on NYC rental properties, I used a data set, scraped from Z
 
 # Data Pre-Processing
 
-image
+<img src="https://github.com/CallEmUp/TimeTravelRental/blob/main/images/DPP1.png">
 
 Looking through the columns, I first looked at the columns: `address`, `area`, `units/{i}/beds`, `baths`, `units/{i}/price`, `latLong/latitude`, and `latLong/longitude`. For clarification, if a listing has "0" beds, it simply means the apartment is a studio and has no separate rooms for the bed.
 
  I first decided to check for the NA count for columns, to see whether or not they would be viable to use in my analysis later on. I will not be looking at `units/{i}/beds` or `units/{i}/price` as apartments will vary in the number of bedrooms.
 
- image
+ <img src="https://github.com/CallEmUp/TimeTravelRental/blob/main/images/DPP2.png">
 
  Based on my tentative columns for my final dataframe, I see that out of 3486 rows, 2836 do not have data for `area`. Thus, I will not use it. Now that I know the relevant columns, I can move onto further pre-processing. As for missing values in `baths`, I know that apartments MUST have a bathroom in the vicinity, and thus will default the value as 1. After cleaning up the data table, the dataframe has a size of (5556, 6).
 
@@ -50,7 +50,7 @@ Now that I have reformatted the data so that each variable is now separate and o
 
 After a complete cleaning of the dataframe, I received the following shape and dataframe:
 
-image
+<img src="https://github.com/CallEmUp/TimeTravelRental/blob/main/images/DPP3.png">
 
 After pre-processing, I have come up with the dataframe I plan to use in my analysis and model building. The DataFrame has 5398 rows and 9 columns. As a side note, I am omitting from normalizing the columns just yet, as interpreting my analysis will be more tangible with the actual prices. I will normalize the data for regression and clustering later when I analyze isochrone intersection apartment data.
 
@@ -60,7 +60,7 @@ After pre-processing, I have come up with the dataframe I plan to use in my anal
 
 Before going into the exploring and analyzing of apartments within isochrone intersections, I plan on comprehensively exploring the whole dataset. For each of the numerical categories, I provided descriptive statistics and plotted a histogram depicting the distribution of values in each column.
 
-image
+<img src="https://github.com/CallEmUp/TimeTravelRental/blob/main/images/GDA1.png">
 
 DescribeResult(nobs=5398, minmax=(0.0, 6.0), mean=2.037791774731382, variance=1.3130054619149154, skewness=0.3687933300586163, kurtosis=-0.0390447557102247)
 
@@ -71,11 +71,11 @@ Using stats.describe, I get low skewness values, suggesting that the column `bed
 
 *For clarification, I should also interpret '0 beds' to mean 'studio'.*
 
-image
+<img src="https://github.com/CallEmUp/TimeTravelRental/blob/main/images/GDA2.png">
 
 Upon looking at the descriptive statistics and histogram depicting distribution of 'baths' data, I can see that the data is heavily skewed to the right. Not only is the mean greater than the median (1.46 > 1), but as the number of bathrooms increase, the count drastically drops. This suggests that the majority of apartments only have one bathroom, less have two, even less have three, and so on. The histogram also highlights the presence of "half bathrooms", bathrooms that do not house full amenities like a shower.
 
-image
+<img src="https://github.com/CallEmUp/TimeTravelRental/blob/main/images/GDA3.png">
 DescribeResult(nobs=5398, minmax=(1600.0, 32000.0), mean=6752.831789551686, variance=24526043.251670357, skewness=2.240537968962258, kurtosis=5.692106147734787)
 
 Like the `baths` column, `price` is also heavily skewed to the right. The mean is greater than the median price, and the histogram's shape suggests the same distribution. I find an existing pattern that as the price goes up, the number of existing apartments decreases.
@@ -85,14 +85,14 @@ Running stats.describe on the `price` column, I also find that there is very hig
 I can interpret this distribution to mean that most apartments hover around a median of $5000, with the count of apartments decreasing as they increase in price.
 I also looked at `neighborhood` data, grouping by the column. I aggregated counts and observed boxplots of price for each of these neighborhoods to better understand the data.
 
-image
-image
+<img src="https://github.com/CallEmUp/TimeTravelRental/blob/main/images/GDA4.png">
+<img src="https://github.com/CallEmUp/TimeTravelRental/blob/main/images/GDA5.png">
 
 Based on the bar chart, the top 5 most common neighborhoods in the NYC Rental Property dataset are: Carnegie Hall, Clinton, East Village, Murray Hill, and Upper East Side.
 
 Observing the boxplots that visualize the distribution and summary statistics of each of these neighborhoods, I can also make several inferences. For one, Carnegie Hall has a wide range of prices for its apartments, with a large amount of outliers at the top, indicating luxury housing. This wide range can indicate that there is wide variability in terms of housing, potentially based on if it is standard or luxury housing. In another instance, I see that Clinton has a very uniform interquartile range, suggesting that the rent is fairly uniform across most apartments, in spite of some outliers. In a neighborhood like the Upper East side, the narrow bottom 50% of data, contrasted with the wide variability and outliers in the top 50% of data, suggests that standard, lower-priced apartments are fairly narrowly distributed in price, while higher-priced luxury apartments can vary signficiantly more.
 
-image 
+<img src="https://github.com/CallEmUp/TimeTravelRental/blob/main/images/GDA6.png"> 
 
 Corr between # of beds and price:  PearsonRResult(statistic=-0.02350657776258395, pvalue=0.08418699985720486)
 Corr between # of baths and price:  PearsonRResult(statistic=0.5905038428225113, pvalue=0.0)
@@ -122,15 +122,15 @@ Using the added TravelTime API functions, I can create an ischrone map, a map th
 
 The result will display geographic visualizations of the isochrones for each location. Using these isochrones, I can later look at their intersections, and the apartment data within this intersection.
 
-image
+<img src="https://github.com/CallEmUp/TimeTravelRental/blob/main/images/IIM1.png">
 
 Now that I have three locations plotted to an individual color, I can now plot the intersection between these isochrones.
 
-image 
+<img src="https://github.com/CallEmUp/TimeTravelRental/blob/main/images/IIM2.png"> 
 
 From here, I can now plot apartments from my dataframe into the isochrone intersection, as well as produce a dataframe of said apartments for later analysis.
 
-image
+<img src="https://github.com/CallEmUp/TimeTravelRental/blob/main/images/IIM3.png">
 
 
 
@@ -139,23 +139,23 @@ image
 
 I can run some analysis on the dataset of apartments within this intersection of isochrones, as well as produce visualizations.
 
-image
-image
-image
-image
+<img src="https://github.com/CallEmUp/TimeTravelRental/blob/main/images/IDA1.png">
+<img src="https://github.com/CallEmUp/TimeTravelRental/blob/main/images/IDA2.png">
+<img src="https://github.com/CallEmUp/TimeTravelRental/blob/main/images/IDA3.png">
+<img src="https://github.com/CallEmUp/TimeTravelRental/blob/main/images/IDA4.png">
 
 Looking at the boxplots of price distributions by neighborhood, I can first identify that Clinton has a fairly narrow range of prices compared to the other four neighborhoods. East Village and Murray Hill share similarities both in boxplot shape, suggesting similar distribution, and the presence of outliers. And like my observation in exploring the general dataframe, I also find that the Upper East side has a very narrow section for its bottom half of data, with a very high range from the maximum (excluding outlier) to the median, suggesting a wide range of luxury housing in the area.
 
 The boxplot of rental property grades within the 5 most common neighborhoods provides good insight into the quality of the applicable apartments. Clinton, being the most common neighborhood, has the highest grade of apartments. Although Clinton has the highest grades, it is noted that the average grade is found just below that of East Village. Despite the top 5 neighborhoods all having relatively similar median apartment grades, it would be recommended that the buyer looks for apartments in the neighborhoods of Clinton, East Village, and Murry Hill as those neighborhoods have the highest average grade as well as the absolute highest grades.
 
-image
+<img src="https://github.com/CallEmUp/TimeTravelRental/blob/main/images/IDA5.png">
 
 Looking at the correlation between beds and price, a range of values of `0.59` to `0.64` indicates a moderately positive relationship between variables `beds` and `price`. In addition, p-values being listed at `0.00` show that the correlation is statistically significant, which again, I have come to expect.
 
 The following are regression analyses to determine the relationships between different variables, such as price and total rooms (the first regression), price and neighborhood (the second regression), and grade and neighborhood (the third regression).
 
-image
-image
+<img src="https://github.com/CallEmUp/TimeTravelRental/blob/main/images/IDA6.png">
+<img src="https://github.com/CallEmUp/TimeTravelRental/blob/main/images/IDA7.png">
 
 Analysis of the Regression Model:
 
@@ -167,7 +167,9 @@ The gap between the training and validation errors is relatively narrow througho
 
 In my case, a mean squared error of 0.015-0.019 is moderate. Thus, the regression model is demonstrating some signs of underfitting for the data, as it doesn’t fully learn from the data. This is also reflected in the R^2 score. As less than 50% of the variance in price is accounted for within total room count.
 
-image
+<img src="https://github.com/CallEmUp/TimeTravelRental/blob/main/images/IDA8.png">
+<img src="https://github.com/CallEmUp/TimeTravelRental/blob/main/images/IDA9.png">
+<img src="https://github.com/CallEmUp/TimeTravelRental/blob/main/images/IDA10.png">
 
 # Final Thoughts and Conclusion
 
