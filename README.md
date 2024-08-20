@@ -1,5 +1,7 @@
 # **Exploring NYC Rental Property Data**
 
+*Full code and ipynb are in the folders*
+
 # Introduction and Data Retrieval
 
 Throughout NYC, a vast population of residents rely on rental properties for housing, which can vary greatly based on location, the number of bedrooms and bathrooms, as well as price. With this data project, I aimed to explore NYC rental property data to derive insights regarding apartment data, fostering data-driven decision making on where a user should best look for a rental property based on their specifications. With this project, I attempt to:
